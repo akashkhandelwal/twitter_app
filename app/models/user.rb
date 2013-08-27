@@ -12,6 +12,8 @@
 class User < ActiveRecord::Base
 	attr_accessible :name, :user_name
 
+	has_many :tweets, dependent: :destroy
+
 	validates :name, presence: true
 	validates :user_name, presence: true, uniqueness: true
 end
