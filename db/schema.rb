@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828193911) do
+ActiveRecord::Schema.define(version: 20130829115349) do
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"
@@ -20,9 +20,15 @@ ActiveRecord::Schema.define(version: 20130828193911) do
     t.datetime "updated_at"
   end
 
+  create_table "tweet_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tweets", force: true do |t|
     t.string   "body"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "private"
@@ -30,7 +36,7 @@ ActiveRecord::Schema.define(version: 20130828193911) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email"
+    t.string   "username"
     t.string   "password_hash"
     t.string   "password_salt"
     t.datetime "created_at"
