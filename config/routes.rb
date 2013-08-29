@@ -6,6 +6,7 @@ QwinixAssignment::Application.routes.draw do
   
   resources :users
   get '/:email' => "users#show"
+  post '/follow_user/:id' => "users#follow_user"
 
   resources :sessions
   resources :tweets

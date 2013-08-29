@@ -1,6 +1,7 @@
-<h1><%= current_user.name %></h1>
+<h1><%= @user.name %></h1>
 
-<h3>Create tweet</h3>
+<% if @user == current_user %>
+	<%= render template: 'tweets/new' %>
+<% end %>
 
-<%= render template: 'tweets/new' %>
 
