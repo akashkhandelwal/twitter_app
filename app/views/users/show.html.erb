@@ -4,4 +4,22 @@
 	<%= render template: 'tweets/new' %>
 <% end %>
 
+<% if @user != current_user and !current_user.following? @user %>
+	<%= link_to "Follow", follow_user_path(id: @user.id), method: :post %>
+<% else %>
+	<p>Following</p>
+<% end %> 
+
+<h3>Tweets</h3>
+<ul>
+<% @user.tweets.each do |tweet| %>
+		<li><%= tweet.body %>
+		<% if current_user.tweets.include? tweet and @user != current_user %>
+			"Shared"
+		<% elsif ( !tweet.private? and @user != current_user )  || ( tweet.private? and current_user.following? @user ) %>
+			<%= link_to 'Retweet', retweet_path(tweet), method: :post %>
+		<% end %>
+<% end %>
+</ul>
+
 
