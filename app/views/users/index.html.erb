@@ -1,0 +1,10 @@
+<h1>Listing all users</h1>
+
+<ul>
+	<% @users.each do |user| %>
+		<li><%= user.name %> 
+			<% if user != current_user %>
+				<%= link_to "Follow", controller: 'users', action: 'follow_user', id: user.id %></li>
+			<% end %>
+	<% end %>
+</ul>
