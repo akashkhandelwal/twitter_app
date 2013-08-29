@@ -18,5 +18,10 @@ class UsersController < ApplicationController
   end
 
   def show
+
+  end
+
+  def follow_user
+    debugger
   end
 end
