@@ -22,7 +22,4 @@ class TweetsController < ApplicationController
     tweet.associate_tweet_with_user current_user
     redirect_to username_path(current_user)
   end
-
-  def destroy
-  end
 end

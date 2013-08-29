@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   		sign_in @user
   		redirect_to username_path(@user), notice: "Signed up!"
   	else
-
   	  render 'new'
   	end
   end
@@ -22,15 +21,15 @@ class UsersController < ApplicationController
     @user = User.find_by_username(params[:username])
   end
 
-  def profile
-    render 'show'
-  end
-
   def follow_user
     user = User.find(params[:id])
+    build_relationship user
+    redirect_to username_path(user)
+  end
+
+  def build_relationship user
     relationship = current_user.relationships.build
     relationship.followed_id = user.id
     relationship.save
-    redirect_to username_path(user)
   end
 end
