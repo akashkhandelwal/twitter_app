@@ -35,6 +35,8 @@ end
 
 gem 'annotate', ">=2.5.0"
 gem 'protected_attributes'
+gem 'bcrypt-ruby', require: "bcrypt"
+gem "debugger"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
