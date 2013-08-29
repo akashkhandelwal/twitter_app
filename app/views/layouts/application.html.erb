@@ -9,7 +9,7 @@
 <body>
 	<div id="user_nav">
 	  <% if current_user %>
-	    Logged in as <%= current_user.name %>.
+	    Logged in as <%= link_to current_user.name, username_path(current_user) %>.
 	    <%= link_to "Log out", sign_out_path %>
 	  <% else %>
 	    <%= link_to "Sign up", sign_up_path %> or

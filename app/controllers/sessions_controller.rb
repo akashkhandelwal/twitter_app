@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	  user = User.authenticate(params[:email], params[:password])
 	  if user
 	    sign_in user
-	    redirect_to user_url(user.id), :notice => "Logged in!"
+	    redirect_to username_path(user), :notice => "Logged in!"
 	  else
 	    flash.now.alert = "Invalid email or password"
 	    render "new"

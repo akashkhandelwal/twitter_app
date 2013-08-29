@@ -5,15 +5,22 @@ class TweetsController < ApplicationController
 	end
 
 	def create
-  	@tweet = current_user.tweets.build(params[:tweet])
+  	tweet = Tweet.new(params[:tweet])
   	if params[:tweet][:private] == 1
-  		set_private_as_private
+  		set_tweet_as_private
   	end
-  	if @tweet.save
-  		redirect_to user_path(current_user.id), notice: "New tweet created!"
+  	if tweet.save
+      tweet.associate_tweet_with_user current_user
+  		redirect_to username_path(current_user), notice: "New tweet created!"
   	else
   		render "users/show"
   	end
+  end
+
+  def retweet
+    tweet = Tweet.find(params[:id])
+    tweet.associate_tweet_with_user current_user
+    redirect_to username_path(current_user)
   end
 
   def destroy
