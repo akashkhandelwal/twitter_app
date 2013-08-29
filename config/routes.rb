@@ -4,12 +4,16 @@ QwinixAssignment::Application.routes.draw do
   get "sign_up" => "users#new", as: 'sign_up'
   get "sign_out" => "sessions#destroy", as: 'sign_out'
   
-  resources :users
-  get '/:email' => "users#show"
-  post '/follow_user/:id' => "users#follow_user"
+  match ":username",:to => "users#show",
+                    :as => "username",
+                    :via => :get
+  resources :users, except: :show
+  
+  post '/follow_user/:id' => "users#follow_user", as: 'follow_user'
 
   resources :sessions
   resources :tweets
+  post '/retweet_path/:id' => "tweets#retweet", as: 'retweet'
   
   get "tweets/create"
   get "tweets/destroy"
