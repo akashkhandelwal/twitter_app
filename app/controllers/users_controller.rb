@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   end
 
   def create
-  	user = User.new(params[:user])
-  	if user.save
-  		sign_in user
-  		redirect_to username_path(user), notice: "Signed up!"
+  	@user = User.new(params[:user])
+  	if @user.save
+  		sign_in @user
+  		redirect_to username_path(@user), notice: "Signed up!"
   	else
-  		render "new"
+
+  	  render 'new'
   	end
   end
 
