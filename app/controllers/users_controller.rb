@@ -19,6 +19,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:username])
+    if !@user
+      render text: "User does not exist"
+    end
   end
 
   def follow_user
