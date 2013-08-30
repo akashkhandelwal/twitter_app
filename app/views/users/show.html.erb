@@ -15,18 +15,18 @@
 	<h3>Tweets</h3>
 	<ul>
 	<% @user.tweets.each do |tweet| %>
-		<% if @user != current_user %>
-			<% if !tweet.private? || (tweet.private? and current_user.following? @user) %>
-				<li>
-					<%= tweet.body %>
+		<% if !tweet.private? || (tweet.private? and current_user.following? @user) %>
+			<li>
+				<%= tweet.body %>
+				<% if @user != current_user %>
 					<% if current_user.tweets.include? tweet %>
 						"Shared"
 					<% else %>
 						<%= link_to 'Retweet', retweet_path(tweet) %>
 					<% end %>
-				</li>
-			<% end %>
-		<% end %>	
+				<% end %>
+			</li>
+		<% end %>
 	<% end %>
 	</ul>
 <% else %>
