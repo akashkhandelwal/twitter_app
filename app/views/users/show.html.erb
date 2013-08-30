@@ -1,25 +1,43 @@
 <h1><%= @user.name %></h1>
 
-<% if @user == current_user %>
-	<%= render template: 'tweets/new' %>
-<% end %>
+<%if current_user %>
 
-<% if @user != current_user and !current_user.following? @user %>
-	<%= link_to "Follow", follow_user_path(id: @user.id) %>
+	<% if @user == current_user %>
+		<%= render template: 'tweets/new', locals: { tweet: @tweet } %>
+	<% end %>
+
+	<% if @user != current_user and !current_user.following? @user %>
+		<%= link_to "Follow", follow_user_path(id: @user.id) %>
+	<% else %>
+		<p>Following</p>
+	<% end %> 
+
+	<h3>Tweets</h3>
+	<ul>
+	<% @user.tweets.each do |tweet| %>
+		<% if @user != current_user %>
+			<% if !tweet.private? || (tweet.private? and current_user.following? @user) %>
+				<li>
+					<%= tweet.body %>
+					<% if current_user.tweets.include? tweet %>
+						"Shared"
+					<% else %>
+						<%= link_to 'Retweet', retweet_path(tweet) %>
+					<% end %>
+				</li>
+			<% end %>
+		<% end %>	
+	<% end %>
+	</ul>
 <% else %>
-	<p>Following</p>
-<% end %> 
-
-<h3>Tweets</h3>
-<ul>
-<% @user.tweets.each do |tweet| %>
-		<li><%= tweet.body %>
-		<% if current_user.tweets.include? tweet and @user != current_user %>
-			"Shared"
-		<% elsif ( !tweet.private? and @user != current_user )  || ( tweet.private? and current_user.following? @user ) %>
-			<%= link_to 'Retweet', retweet_path(tweet) %>
+	<h3>Tweets</h3>
+	<ul>
+		<% @user.tweets.each do |tweet| %>
+			<% if !tweet.private? %>
+				<li><%= tweet.body %></li>
+			<% end %>
 		<% end %>
+	</ul>
 <% end %>
-</ul>
 
 
