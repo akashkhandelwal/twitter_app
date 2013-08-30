@@ -5,7 +5,7 @@
 <% end %>
 
 <% if @user != current_user and !current_user.following? @user %>
-	<%= link_to "Follow", follow_user_path(id: @user.id), method: :post %>
+	<%= link_to "Follow", follow_user_path(id: @user.id) %>
 <% else %>
 	<p>Following</p>
 <% end %> 
@@ -17,7 +17,7 @@
 		<% if current_user.tweets.include? tweet and @user != current_user %>
 			"Shared"
 		<% elsif ( !tweet.private? and @user != current_user )  || ( tweet.private? and current_user.following? @user ) %>
-			<%= link_to 'Retweet', retweet_path(tweet), method: :post %>
+			<%= link_to 'Retweet', retweet_path(tweet) %>
 		<% end %>
 <% end %>
 </ul>

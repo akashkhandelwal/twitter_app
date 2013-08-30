@@ -9,11 +9,11 @@ QwinixAssignment::Application.routes.draw do
                     :via => :get
   resources :users, except: :show
   
-  post '/follow_user/:id' => "users#follow_user", as: 'follow_user'
+  get '/follow_user/:id' => "users#follow_user", as: 'follow_user'
 
   resources :sessions
   resources :tweets
-  post '/retweet_path/:id' => "tweets#retweet", as: 'retweet'
+  get '/retweet_path/:id' => "tweets#retweet", as: 'retweet'
   
   get "tweets/create"
   get "tweets/destroy"
