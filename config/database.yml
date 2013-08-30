@@ -18,6 +18,3 @@ test:
 production:
   adapter: postgresql
   database: app_production
-  username: postgres
-  password: postgres
-  hostname: ec2-54-221-199-33.compute-1.amazonaws.com
